@@ -1,0 +1,62 @@
+# Basic Math
+print("--- Basic Math ---")
+a = 10
+b = 20
+c = a + b * 2
+print(c)
+
+# Matrix Ops
+print("\n--- Matrix Ops ---")
+m1 = [[1, 2], [3, 4]]
+m2 = [[1, 0], [0, 1]]
+m3 = m1 @ m2
+print(m3)
+
+m4 = TRP(m1)
+print("Transpose:")
+print(m4)
+
+# Control Flow
+print("\n--- Control Flow ---")
+x = 0
+while x < 4:
+    print(x)
+    x = x + 1
+
+if x == 3:
+    print("x is 3")
+else:
+    print("x is not 3")
+
+# Functions
+print("\n--- Functions ---")
+def square(n):
+    return n * n
+
+print(square(5))
+
+# Deep Learning (XOR)
+print("\n--- Deep Learning (XOR) ---")
+
+# XOR Data
+X = [[0, 0], [0, 1], [1, 0], [1, 1]]
+Y = [[0], [1], [1], [0]]
+
+def create_xor_model():
+    m = MODELO()
+    # 2 inputs -> 4 hidden -> 1 output
+    m.agregar(CAPA_DENSA(2, 4, "relu"))
+    m.agregar(CAPA_DENSA(4, 1, "sigmoid"))
+    return m
+
+model = create_xor_model()
+print("Training...")
+ENTRENAR(model, X, Y, 1000, 0.1)
+
+print("Predictions:")
+pred = model.adelante(X)
+print(pred)
+
+# Plotting
+print("\n--- Plotting ---")
+GRAFICAR_DISPERSION(X, pred)

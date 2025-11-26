@@ -1,0 +1,25 @@
+# Regresion Lineal
+print("--- Regresion Lineal ---")
+
+# Datos de entrenamiento (y = 2x + 1)
+X = [[1], [2], [3], [4], [5]]
+Y = [[3], [5], [7], [2], [11]]
+
+# Crear modelo
+modelo = REGRESION_LINEAL()
+
+# Ajustar modelo
+print("Ajustando modelo...")
+AJUSTAR(modelo, X, Y)
+
+# Predecir
+print("Prediciendo...")
+predicciones = modelo.predecir(X)
+print(predicciones)
+
+# Graficar
+print("\n--- Grafica ---")
+GRAFICAR_DISPERSION(X, Y, predicciones)
+
+GRAFICAR_DISPERSION(X, Y)
+
