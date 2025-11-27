@@ -1,5 +1,7 @@
 # DeepPiton: Lenguaje de Dominio Específico para Deep Learning
 
+Autores: Diego Casallas - Jose Lesmes
+
 DeepPiton es un DSL (Domain Specific Language) diseñado para facilitar la definición, entrenamiento y evaluación de modelos de Deep Learning y Machine Learning. Construido sobre Python utilizando ANTLRv4, ofrece una sintaxis familiar y sencilla, permitiendo a los usuarios centrarse en la lógica de sus modelos sin la complejidad de las librerías tradicionales.
 
 > **Nota:** Este proyecto implementa todas las operaciones matemáticas y de Deep Learning desde cero, sin dependencias externas como NumPy o TensorFlow, para fines educativos y de demostración.
