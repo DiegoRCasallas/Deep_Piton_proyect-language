@@ -34,7 +34,8 @@ class DeepPitonVisitorImpl(DeepPitonVisitor):
             'range': range,
             'int': int,
             'float': float,
-            'str': str
+            'str': str,
+            'MATRIZ': Matriz
         }
 
     def _regresion_lineal_wrapper(self):

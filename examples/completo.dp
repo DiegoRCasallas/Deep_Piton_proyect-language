@@ -1,0 +1,132 @@
+# ==========================================
+# Demostración Completa de Deep Piton
+# ==========================================
+
+print("=== 1. Aritmética Básica y Variables ===")
+a = 10
+b = 3
+suma = a + b
+resta = a - b
+mult = a * b
+div = a / b
+mod = a % b
+pot = a ** b
+
+print("a:", a, "b:", b)
+print("Suma:", suma)
+print("Resta:", resta)
+print("Multiplicación:", mult)
+print("División:", div)
+print("Módulo:", mod)
+print("Potencia (10^3):", pot)
+
+print("\n=== 2. Control de Flujo ===")
+# Condicionales
+if a > b:
+    print("a es mayor que b")
+elif a == b:
+    print("a es igual a b")
+else:
+    print("a es menor que b")
+
+# Ciclo While
+print("Contando hasta 3 con while:")
+i = 0
+while i < 3:
+    print(i)
+    i = i + 1
+
+# Ciclo For (simulado con range)
+print("Ciclo for con range(3):")
+for x in range(3):
+    print(x)
+
+print("\n=== 3. Funciones ===")
+def factorial(n):
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)
+
+print("Factorial de 5:", factorial(5))
+
+print("\n=== 4. Operaciones Matriciales ===")
+m1 = MATRIZ([[1, 2], [3, 4]])
+m2 = MATRIZ([[5, 6], [7, 8]])
+
+print("Matriz 1:")
+print(m1)
+print("Matriz 2:")
+print(m2)
+
+# Suma
+print("Suma (m1 + m2):")
+print(m1 + m2)
+
+# Multiplicación Elemento a Elemento
+print("Mult Elemento (m1 * m2):")
+print(m1 * m2)
+
+# Multiplicación Matricial
+print("Matmul (m1 @ m2):")
+print(m1 @ m2)
+
+# Transpuesta
+print("Transpuesta de m1:")
+print(TRP(m1))
+
+# Inversa
+print("Inversa de m1:")
+inv_m1 = INV(m1)
+print(inv_m1)
+print("Verificación (m1 @ inv_m1):")
+print(m1 @ inv_m1)
+
+print("\n=== 5. Regresión Lineal ===")
+# Datos: y = 2x + 1
+X_reg = [[1], [2], [3], [4], [5]]
+Y_reg = [[3], [5], [7], [9], [11]]
+
+reg = REGRESION_LINEAL()
+print("Entrenando regresión lineal...")
+AJUSTAR(reg, X_reg, Y_reg)
+
+print("Prediciendo para X=[6, 7]:")
+X_test = [[6], [7]]
+pred_reg = reg.predecir(X_test)
+print(pred_reg)
+
+print("Graficando Regresión (Datos Originales):")
+pred_train = reg.predecir(X_reg)
+GRAFICAR_DISPERSION(X_reg, Y_reg, pred_train)
+
+print("\n=== 6. Red Neuronal (XOR) ===")
+X_xor = [[0, 0], [0, 1], [1, 0], [1, 1]]
+Y_xor = [[0], [1], [1], [0]]
+
+nn = MODELO()
+nn.agregar(CAPA_DENSA(2, 4, "relu"))
+nn.agregar(CAPA_DENSA(4, 1, "sigmoid"))
+
+print("Entrenando Red Neuronal...")
+ENTRENAR(nn, X_xor, Y_xor, 1000, 0.1)
+
+print("Predicciones XOR:")
+pred_xor = nn.adelante(X_xor)
+print(pred_xor)
+
+print("\n=== 7. Archivos ===")
+ruta = "prueba_guardar.txt"
+texto = "Hola desde Deep Piton!"
+print("Guardando '", texto, "' en ", ruta, "...")
+GUARDAR_TEXTO(ruta, texto)
+print("Archivo guardado.")
+
+# Nota: CARGAR_CSV espera un CSV numérico, así que no podemos cargar el texto guardado con eso.
+# Creemos un CSV numérico temporalmente
+datos_csv = "1,2\n3,4"
+GUARDAR_TEXTO("temp.csv", datos_csv)
+print("Cargando CSV numérico:")
+matriz_csv = CARGAR_CSV("temp.csv")
+print(matriz_csv)
+
+print("\n=== Fin de la Demostración ===")

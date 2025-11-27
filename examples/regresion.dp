@@ -23,3 +23,6 @@ GRAFICAR_DISPERSION(X, Y, predicciones)
 
 GRAFICAR_DISPERSION(X, Y)
 
+m5 = MATRIZ([[1, 2], [3, 4]])
+print("m5:")
+print(m5)
