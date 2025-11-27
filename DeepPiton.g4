@@ -68,20 +68,11 @@ NEWLINE: [\r\n]+ -> skip;
 WS: [ \t]+ -> skip;
 COMMENT: '#' ~[\r\n]* -> skip;
 
-// Python-like indentation handling is tricky in pure ANTLR without custom lexer logic.
-// For simplicity in this DSL, we might rely on explicit tokens or a simplified structure first.
-// However, the prompt asks for Python-like syntax.
-// To handle indentation properly in ANTLR usually requires a custom TokenSource or pre-processing.
-// Given the constraints and "simple syntax", I will use a simplified approach where blocks might use braces OR 
-// I will assume the user provides code with some specific delimiters or I'll try to implement a basic indentation handler if possible.
-// BUT, standard ANTLR grammars don't handle whitespace-sensitive indentation out of the box easily without target-language code.
-// To stick to the "No external libraries" rule strictly for the *runtime* (math/dl), I can use ANTLR for parsing.
-// I will use '{' and '}' for blocks in the underlying grammar to make it robust, 
-// OR I will define INDENT/DEDENT tokens and assume a pre-processor or custom lexer emits them.
-// Let's try to stick to a slightly more C-like structure for blocks if indentation is too complex, 
-// OR use a pre-processing step in Python to convert indentation to INDENT/DEDENT tokens before feeding to ANTLR.
-// Let's go with the Pre-processor approach for Indentation.
-// So the grammar expects INDENT and DEDENT tokens.
+//El manejo de la sangría similar al de Python es complicado en ANTLR puro sin lógica de análisis léxico personalizada.
+// Para simplificar este DSL, podríamos usar primero tokens explícitos o una estructura simplificada.
+// Para manejar la sangría correctamente en ANTLR, generalmente se requiere un TokenSource personalizado o preprocesamiento.
+// Entonces, la gramática espera tokens INDENT y DEDENT.
+
 
 INDENT: '<INDENT>';
 DEDENT: '<DEDENT>';
