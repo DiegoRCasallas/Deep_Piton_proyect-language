@@ -1,0 +1,121 @@
+# Prueba Completa de DeepPiton
+
+print("=== INICIO PRUEBA COMPLETA ===")
+
+# 1. Tipos de Datos y Aritmetica
+print("\n--- 1. Aritmetica Basica ---")
+a = 10
+b = 3.5
+c = a + b * 2
+print("a:", a)
+print("b:", b)
+print("c (a + b * 2):", c)
+print("Potencia (a ** 2):", a ** 2)
+print("Modulo (a % 3):", a % 3)
+
+# 1.1 Trigonometria
+print("\n--- 1.1 Trigonometria ---")
+angulo = 0.0
+print("Angulo:", angulo)
+print("Seno:", SENO(angulo))
+print("Coseno:", COS(angulo))
+print("Tangente:", TAN(angulo))
+
+angulo = 3.14159 / 4 # 45 grados
+print("Angulo (PI/4):", angulo)
+print("Seno:", SENO(angulo))
+print("Coseno:", COS(angulo))
+print("Tangente:", TAN(angulo))
+
+# 2. Control de Flujo
+print("\n--- 2. Control de Flujo ---")
+if c > 15:
+    print("c es mayor que 15")
+else:
+    print("c es menor o igual a 15")
+
+contador = 0
+print("While loop:")
+while contador < 3:
+    print("Contador:", contador)
+    contador = contador + 1
+
+print("For loop:")
+lista_nums = [1, 2, 3]
+for n in lista_nums:
+    print("Numero:", n)
+
+# 3. Funciones
+print("\n--- 3. Funciones ---")
+def cuadrado(x):
+    return x * x
+
+res = cuadrado(5)
+print("Cuadrado de 5:", res)
+
+# 4. Matrices
+print("\n--- 4. Matrices ---")
+m1 = MATRIZ([[1, 2], [3, 4]])
+m2 = MATRIZ([[2, 0], [0, 2]])
+print("m1:")
+print(m1)
+print("m1 * m2 (Matmul):")
+print(MM(m1, m2))
+print("Transpuesta de m1:")
+print(TRP(m1))
+print("Inversa de m1:")
+print(INV(m1))
+
+# 5. Carga de Datos y Procesamiento
+print("\n--- 5. Carga de Datos (CSV) ---")
+datos = CARGAR_CSV("examples/datos_grandes.csv")
+print("Datos cargados (primeras filas):")
+# No podemos imprimir todo si es muy grande, pero imprimimos el objeto matriz
+print(datos)
+
+# Separar X e Y
+# datos es una Matriz, iteramos sobre ella
+X_lista = []
+Y_lista = []
+
+for fila in datos:
+    # fila es una lista [x, y]
+    x_val = OBTENER(fila, 0)
+    y_val = OBTENER(fila, 1)
+    X_lista = X_lista + [[x_val]]
+    Y_lista = Y_lista + [[y_val]]
+
+X = MATRIZ(X_lista)
+Y = MATRIZ(Y_lista)
+
+print("X forma:", X) # Imprime la matriz, que muestra dimensiones en __repr__ si se usara, pero aqui imprime contenido
+print("Y forma:", Y)
+
+# 6. Regresion Lineal
+print("\n--- 6. Regresion Lineal ---")
+modelo_lin = REGRESION_LINEAL()
+print("Ajustando modelo lineal...")
+AJUSTAR(modelo_lin, X, Y)
+print("Prediciendo...")
+preds_lin = modelo_lin.predecir(X)
+print("Graficando Regresion Lineal...")
+GRAFICAR_DISPERSION(X, Y, preds_lin)
+
+# 7. Red Neuronal (Modelo)
+print("\n--- 7. Red Neuronal ---")
+modelo_nn = MODELO()
+# Capa oculta
+modelo_nn.agregar(CAPA_DENSA(1, 10, "relu"))
+# Capa salida
+modelo_nn.agregar(CAPA_DENSA(10, 1, "linear"))
+
+print("Entrenando Red Neuronal (esto puede tardar)...")
+# Entrenamos por menos epocas para la prueba
+ENTRENAR(modelo_nn, X, Y, 500, 0.01)
+
+print("Prediciendo con Red Neuronal...")
+preds_nn = modelo_nn.adelante(X)
+print("Graficando Red Neuronal...")
+GRAFICAR_DISPERSION(X, Y, preds_nn)
+
+print("\n=== FIN PRUEBA COMPLETA ===")

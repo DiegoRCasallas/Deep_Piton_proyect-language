@@ -46,6 +46,50 @@ def exp(x):
         resultado += termino
     return resultado
 
+def sin(x):
+    """
+    Calcula sin(x) usando serie de Taylor:
+    sin(x) = x - x^3/3! + x^5/5! - ...
+    """
+    # Normalizar x a [-pi, pi] para mejor convergencia
+    pi = 3.14159265358979323846
+    x = x % (2 * pi)
+    if x > pi:
+        x -= 2 * pi
+    
+    n = 10 # Número de términos
+    resultado = 0.0
+    termino = x
+    for i in range(1, n + 1):
+        resultado += termino
+        termino *= -1 * x * x / ((2 * i) * (2 * i + 1))
+    return resultado
+
+def cos(x):
+    """
+    Calcula cos(x) usando serie de Taylor:
+    cos(x) = 1 - x^2/2! + x^4/4! - ...
+    """
+    # Normalizar x a [-pi, pi] para mejor convergencia
+    pi = 3.14159265358979323846
+    x = x % (2 * pi)
+    if x > pi:
+        x -= 2 * pi
+    
+    n = 10 # Número de términos
+    resultado = 1.0
+    termino = 1.0
+    for i in range(1, n + 1):
+        resultado += termino
+        termino *= -1 * x * x / ((2 * i) * (2 * i + 1))
+    return resultado
+
+def tan(x):
+    """
+    Calcula tan(x) = sin(x) / cos(x)
+    """
+    return sin(x) / cos(x)
+
 class Matriz:
     def __init__(self, datos):
         """

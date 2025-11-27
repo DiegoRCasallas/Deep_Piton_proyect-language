@@ -1,7 +1,7 @@
 import sys
 from src.parser.DeepPitonVisitor import DeepPitonVisitor
 from src.parser.DeepPitonParser import DeepPitonParser
-from src.math_core import Matriz, inversa
+from src.math_core import Matriz, inversa, sin, cos, tan
 from src.dl_core import Densa, Modelo
 from src.utils import cargar_csv, guardar_texto, graficar_dispersion_ascii
 
@@ -35,7 +35,11 @@ class DeepPitonVisitorImpl(DeepPitonVisitor):
             'int': int,
             'float': float,
             'str': str,
-            'MATRIZ': Matriz
+            'MATRIZ': Matriz,
+            'OBTENER': lambda x, i: x[int(i)],
+            'SENO': sin,
+            'COS': cos,
+            'TAN': tan
         }
 
     def _regresion_lineal_wrapper(self):
@@ -119,6 +123,10 @@ class DeepPitonVisitorImpl(DeepPitonVisitor):
         left = self.visit(ctx.expression(0))
         right = self.visit(ctx.expression(1))
         return left ** right
+
+    def visitUnaryMinusExpr(self, ctx: DeepPitonParser.UnaryMinusExprContext):
+        value = self.visit(ctx.expression())
+        return -value
 
     def _to_matrix(self, val):
         if isinstance(val, Matriz):

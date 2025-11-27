@@ -1,0 +1,29 @@
+# Prueba de Funcion Seno y Graficacion
+
+print("=== PRUEBA SENO Y GRAFICA ===")
+
+# Generar datos X e Y
+# X de -3.14 a 3.14 (aprox)
+# Como no tenemos range flotante facil, usamos enteros y dividimos
+
+X_lista = []
+Y_lista = []
+
+print("Generando datos...")
+i = -31
+while i <= 31:
+    x = i / 10.0
+    y = SENO(x)
+    
+    X_lista = X_lista + [[x]]
+    Y_lista = Y_lista + [[y]]
+    
+    i = i + 2 # Paso de 0.2
+
+X = MATRIZ(X_lista)
+Y = MATRIZ(Y_lista)
+
+print("Graficando Seno(x)...")
+GRAFICAR_DISPERSION(X, Y)
+
+print("=== FIN PRUEBA ===")
