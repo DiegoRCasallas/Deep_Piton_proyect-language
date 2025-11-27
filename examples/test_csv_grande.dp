@@ -1,0 +1,4 @@
+# Test loading large CSV
+print("--- Cargando CSV Grande ---")
+datos = CARGAR_CSV("examples/datos_grandes.csv")
+print(datos)

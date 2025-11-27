@@ -1,14 +1,17 @@
-import csv
 from src.math_core import Matriz
 
 def cargar_csv(ruta_archivo):
     datos = []
     try:
         with open(ruta_archivo, 'r') as f:
-            lector = csv.reader(f)
-            for fila in lector:
+            lineas = f.readlines()
+            for linea in lineas:
+                linea = linea.strip()
+                if not linea:
+                    continue
+                partes = linea.split(',')
                 try:
-                    fila_flotante = [float(x) for x in fila]
+                    fila_flotante = [float(x.strip()) for x in partes]
                     datos.append(fila_flotante)
                 except ValueError:
                     continue # Saltar encabezado o filas no numéricas
