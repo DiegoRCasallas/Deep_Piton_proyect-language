@@ -1,47 +1,154 @@
-Título: Diseño e Implementación del Lenguaje de Dominio Específico DeepPiton para Aprendizaje Profundo.
+# DeepPiton: Lenguaje de Dominio Específico para Deep Learning
 
-Objetivo: Desarrollar un DSL llamado DeepPiton utilizando ANTLRv4 y el patrón Visitor en Python. DeepPiton ofrecerá una sintaxis simple y familiar, similar a Python, para definir, entrenar y evaluar modelos de Deep Learning (DL) y Machine Learning (ML).
+DeepPiton es un DSL (Domain Specific Language) diseñado para facilitar la definición, entrenamiento y evaluación de modelos de Deep Learning y Machine Learning. Construido sobre Python utilizando ANTLRv4, ofrece una sintaxis familiar y sencilla, permitiendo a los usuarios centrarse en la lógica de sus modelos sin la complejidad de las librerías tradicionales.
 
-🎯 Condición Fundamental (El Desafío Central):
-Queda estrictamente prohibido el uso de librerías externas para operaciones matemáticas, de álgebra lineal o de Deep Learning (ej. NumPy, SciPy, Pandas, TensorFlow, PyTorch). Todas las estructuras y algoritmos (manejo de matrices, multiplicación, activación, loss functions, optimizadores) deben ser implementados desde cero en Python, utilizando estructuras de datos nativas (listas, diccionarios, etc.) como backend de ejecución del DSL.
+> **Nota:** Este proyecto implementa todas las operaciones matemáticas y de Deep Learning desde cero, sin dependencias externas como NumPy o TensorFlow, para fines educativos y de demostración.
 
-1. Requisitos de Sintaxis y Semántica (Gramática ANTLR)
-DeepPiton debe soportar una sintaxis tipo Python para:
+## Tabla de Contenidos
+1. [Uso](#uso)
+2. [Sintaxis Básica](#sintaxis-básica)
+3. [Operaciones Matemáticas y Matriciales](#operaciones-matemáticas-y-matriciales)
+4. [Estructuras de Control](#estructuras-de-control)
+5. [Funciones](#funciones)
+6. [Deep Learning API](#deep-learning-api)
+7. [Visualización](#visualización)
+8. [Ejemplos](#ejemplos)
 
-Variables y Asignación: variable = expresion
+## Uso
 
-Operaciones Aritméticas: +, -, *, /, %, Potencia (**).
+Para ejecutar un script de DeepPiton (`.dp`), utiliza el intérprete desde la línea de comandos:
 
-Operaciones Matriciales: Sintaxis para la Multiplicación Matricial (ej. A @ B o MM(A, B)), Transpuesta (TRP(A)) e Inversa (INV(A)).
+```bash
+python deep_piton.py ruta/al/archivo.dp
+```
 
-Estructuras de Control: if/elif/else, for y while.
+## Sintaxis Básica
 
-Definición de Funciones: def nombre_funcion(parametros):
+### Variables y Tipos de Datos
+DeepPiton soporta números (enteros y flotantes), cadenas de texto y listas (que pueden representar vectores o matrices).
 
-2. Módulos de Aprendizaje Profundo (Implementación en el Visitor)
-El lenguaje debe incluir funciones embebidas (built-in) que se mapeen a tu lógica Python implementada desde cero:
+```python
+x = 10
+y = 3.14
+nombre = "DeepPiton"
+lista = [1, 2, 3]
+matriz = [[1, 0], [0, 1]]
+```
 
-Manejo de Datos:
+## Operaciones Matemáticas y Matriciales
 
-CARGAR_CSV("ruta.csv"): Carga datos a una estructura de matriz de DeepPiton.
+Soporta operaciones aritméticas estándar y operaciones específicas para álgebra lineal.
 
-GUARDAR_TEXTO("ruta.txt", datos).
+| Operación | Sintaxis | Descripción |
+|-----------|----------|-------------|
+| Suma | `a + b` | Suma de escalares o matrices. |
+| Resta | `a - b` | Resta de escalares o matrices. |
+| Multiplicación | `a * b` | Multiplicación escalar o elemento a elemento. |
+| División | `a / b` | División escalar. |
+| Potencia | `a ** b` | Potencia. |
+| Producto Matricial | `A @ B` o `MM(A, B)` | Multiplicación de matrices. |
+| Transpuesta | `TRP(A)` | Transpuesta de una matriz. |
+| Inversa | `INV(A)` | Inversa de una matriz. |
 
-Modelado DL/ML:
+## Estructuras de Control
 
-def modelo_MLP(): (Sintaxis Python-like para definir la arquitectura).
+Sintaxis similar a Python para el control de flujo.
 
-CAPA_DENSA(entradas, salidas, activacion='relu'): Función para añadir una capa a un modelo.
+### If / Elif / Else
+```python
+if x > 0:
+    print("Positivo")
+elif x < 0:
+    print("Negativo")
+else:
+    print("Cero")
+```
 
-ENTRENAR(modelo, datos, etiquetas, epocas, lr): Llama a tu algoritmo de backpropagation nativo.
+### While
+```python
+i = 0
+while i < 5:
+    print(i)
+    i = i + 1
+```
 
-Funciones de ML predefinidas: regresion_lineal(X, Y), clasificador_perceptron(X, Y).
+### For
+```python
+for x in [1, 2, 3]:
+    print(x)
+```
 
-3. Ejecución y Visualización (Arte ASCII)
-El intérprete se ejecutará desde la consola, recibiendo un archivo fuente (e.g., python deep_piton.py mi_codigo.dp).
+## Funciones
 
-Los resultados y errores se mostrarán en la consola.
+Definición de funciones personalizadas.
 
-Gráficos (Arte ASCII): El lenguaje debe incluir una función nativa para visualización que represente los datos y/o el progreso del entrenamiento utilizando exclusivamente caracteres de texto (Arte ASCII), asegurando que no se requieran librerías de interfaz gráfica.
+```python
+def cuadrado(n):
+    return n * n
 
-Ejemplo de función: GRAFICAR_DISPERSION(X, Y) que imprime un gráfico de dispersión en texto.
+resultado = cuadrado(5)
+```
+
+## Deep Learning API
+
+Funciones integradas para construir y entrenar modelos.
+
+### Manejo de Datos
+- **`CARGAR_CSV("ruta.csv")`**: Carga un archivo CSV como una matriz.
+- **`GUARDAR_TEXTO("ruta.txt", datos)`**: Guarda datos en un archivo de texto.
+
+### Creación de Modelos
+- **`MODELO()`**: Crea una instancia de un modelo de red neuronal vacío.
+- **`REGRESION_LINEAL()`**: Crea un modelo específico para regresión lineal.
+
+### Capas
+- **`CAPA_DENSA(entradas, salidas, activacion)`**: Define una capa densa.
+    - `activacion`: Puede ser `"relu"`, `"sigmoid"`, `"tanh"`, o `None`.
+
+### Entrenamiento
+- **`ENTRENAR(modelo, X, Y, epocas, learning_rate)`**: Entrena un modelo de red neuronal.
+- **`AJUSTAR(modelo, X, Y)`**: Entrena un modelo de regresión lineal (usa la ecuación normal o descenso de gradiente interno).
+
+### Predicción
+- **`modelo.adelante(X)`**: Realiza una pasada hacia adelante (inferencia) en una red neuronal.
+- **`modelo.predecir(X)`**: Realiza una predicción con un modelo de regresión.
+
+## Visualización
+
+- **`GRAFICAR_DISPERSION(X, Y, [Predicciones])`**: Genera un gráfico de dispersión en arte ASCII en la consola.
+
+## Ejemplos
+
+### 1. Operaciones Básicas
+```python
+m1 = [[1, 2], [3, 4]]
+m2 = [[1, 0], [0, 1]]
+producto = m1 @ m2
+print(producto)
+```
+
+### 2. Red Neuronal (XOR)
+Este ejemplo entrena una red neuronal simple para resolver el problema XOR.
+
+```python
+# Datos XOR
+X = [[0, 0], [0, 1], [1, 0], [1, 1]]
+Y = [[0], [1], [1], [0]]
+
+# Definir Modelo
+m = MODELO()
+m.agregar(CAPA_DENSA(2, 4, "relu"))    # Capa oculta: 2 entradas, 4 neuronas
+m.agregar(CAPA_DENSA(4, 1, "sigmoid")) # Capa salida: 4 entradas, 1 neurona
+
+# Entrenar
+print("Entrenando...")
+ENTRENAR(m, X, Y, 1000, 0.1)
+
+# Predecir
+pred = m.adelante(X)
+print("Predicciones:")
+print(pred)
+
+# Visualizar
+GRAFICAR_DISPERSION(X, pred)
+```
